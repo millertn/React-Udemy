@@ -1,0 +1,56 @@
+<!-- //css block -->
+<style>
+.person{
+    display: inline-block;
+    margin:10px;
+    border: 1px solid #eee;
+    box-shadow:2px 2px #ccc;
+}
+</style>
+
+<!-- //html block -->
+<div id="p1"></div>
+<div id="p2"></div>
+
+<!-- OR -->
+
+<div id="app"></div>
+
+<!-- //javascript -->
+<script>
+function Person (props) {
+    return(
+        <div className='person'>
+        // note, className not class. classes can be dynamically added using .render props
+            <h1>{props.name}</h1>
+            <h1>{props.age}</h1>
+        </div>
+    );
+}
+var app = (
+    <div>
+        <Person name="Max" age='28' />    
+        <Person name="Dave" age='27' />    
+    </div>
+);
+
+ReactDOM.render(<Person name="Max" age="28"/>, document.querySelector('#p1'));
+ReactDOM.render(<Person name="Dave" age="27"/>, document.querySelector('#p2'));
+//OR
+ReactDom.render(app, document.querySelector('#app'));
+
+
+const printMyName = function () {
+    console.log('name');
+}
+
+const printMyName = () => {
+    console.log('name');
+}
+
+const printMyName = (name) => {
+    console.log(name);
+}
+
+
+</script>
