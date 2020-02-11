@@ -59,6 +59,7 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
+import AppComponent from './AppComponent/AppComponent';
 import UserInput from './Lecture3Assigment/UserInput/UserInput';
 import UserOutput from './Lecture3Assigment/UserOutput/UserOutput';
 
@@ -70,21 +71,22 @@ class App extends Component {
       {id: 3, name:"JJ", age:28}
     ],
     username: 'daveCutePatoot',
-    showPersons: false
+    showPersons: false,
+    currentTextLength:""
   }
   //state is to be used sparingly and with care, function components are preferred
   
-  // switchNameHandler = (newName) => {
-  //     //this is a nono
-  //     // this.state.persons[0].name = this.state.persons[0].name + " Switched"; 
-  //     this.setState({
-  //       persons:[
-  //         {name: newName, age:23},
-  //         {name:"Dave - switched", age:28},
-  //         {name:"JJ - switched", age:28}
-  //       ]
-  //     });
-  // }
+  switchNameHandler = (newName) => {
+      //this is a nono
+      // this.state.persons[0].name = this.state.persons[0].name + " Switched"; 
+      this.setState({
+        persons:[
+          {name: newName, age:23},
+          {name:"Dave - switched", age:28},
+          {name:"JJ - switched", age:28}
+        ]
+      });
+  }
 
   deletePersonHandler = (personIndex) => {
     //this can lead to unpredictability and is bad practice as it manipulates the original data
@@ -99,15 +101,28 @@ class App extends Component {
     this.setState({persons:persons});
   }
 
-  nameChangedHandler = (event) => {
-    this.setState({
-      persons:[
-        {name: "Taylor - switched", age:23},
-        {name: event.target.value, age:28},
-        {name: "JJ - switched", age:28}
-      ]
+  nameChangedHandler = (event, id) => {
+    const personIndex = this.state.persons.findIndex(p => {
+      return p.id == id;
     });
 
+    //alternate way
+    //const person = Object.assign({}. this.state.person[personIndex]);
+    const person = {
+      ...this.state.persons[personIndex]
+    }
+    person.name = event.target.value;
+
+    const persons = [...this.state.persons];
+    persons[personIndex] = person;
+    this.setState({persons: persons});
+  }
+
+  getTextHandler(event) {
+    let length = event.target.value.length;
+    this.setState ({
+      currentTextLength:length
+    });
   }
 
   togglePersonsHandler = () => {
@@ -136,12 +151,14 @@ class App extends Component {
                 key={person.id}
                 name={person.name} 
                 age={person.age} 
-                click={ () => this.deletePersonHandler(index)}
+                click= {() => this.deletePersonHandler(index)}
+                changed={ (event) => this.nameChangedHandler(event, person.id)}
               />
             )
           })}
         </div>
       );
+    }
 
       //static, not very useful.
       // persons = (
@@ -163,16 +180,27 @@ class App extends Component {
       //     </Person>
       //   </div>
       // );
-    }
+
+
+    // return (
+    //   <div className="App">
+    //     <h1>Hi, I'm a react app</h1>
+    //     <button 
+    //       style={style}
+    //       onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
+    //     </button>
+    //     {persons}
+    //     <input type="text" onChange={ () => this.getTextHandler()} />
+    //     <p>This is the text you entered: </p>
+    //   </div>
+    // );
 
     return (
-      <div className="App">
-        <h1>Hi, I'm a react app</h1>
-        <button 
-          style={style}
-          onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
-        </button>
-        {persons}
+      <div className='App'>
+        <AppComponent 
+          length={this.state.currentTextLength}
+          changed={(event) => this.getTextHandler(event)}
+        />
       </div>
     );
   }
