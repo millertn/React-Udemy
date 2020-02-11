@@ -59,31 +59,44 @@ import React, { Component } from 'react';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-import UserInput from './UserInput/UserInput';
-import UserOutput from './UserOutput/UserOutput';
+import UserInput from './Lecture3Assigment/UserInput/UserInput';
+import UserOutput from './Lecture3Assigment/UserOutput/UserOutput';
 
 class App extends Component {
   state = {
     persons: [
-      {name: "Taylor", age:23},
-      {name:"Dave", age:28},
-      {name:"JJ", age:28}
+      {id: 1, name: "Taylor", age:23},
+      {id: 2, name:"Dave", age:28},
+      {id: 3, name:"JJ", age:28}
     ],
-    username: 'daveCutePatoot'
+    username: 'daveCutePatoot',
+    showPersons: false
   }
   //state is to be used sparingly and with care, function components are preferred
   
-  switchNameHandler = (newName) => {
-      //this is a nono
-      // this.state.persons[0].name = this.state.persons[0].name + " Switched"; 
-      this.setState({
-        persons:[
-          {name: newName, age:23},
-          {name:"Dave - switched", age:28},
-          {name:"JJ - switched", age:28}
-        ]
-      });
-    
+  // switchNameHandler = (newName) => {
+  //     //this is a nono
+  //     // this.state.persons[0].name = this.state.persons[0].name + " Switched"; 
+  //     this.setState({
+  //       persons:[
+  //         {name: newName, age:23},
+  //         {name:"Dave - switched", age:28},
+  //         {name:"JJ - switched", age:28}
+  //       ]
+  //     });
+  // }
+
+  deletePersonHandler = (personIndex) => {
+    //this can lead to unpredictability and is bad practice as it manipulates the original data
+    // const persons = this.state.persons;
+
+    //these two are the same, tho the spread operator (...) is more modern.
+    const persons = [...this.state.persons]
+    // const persons = this.state.persons.slice();
+
+    //best practice for updating state: 1. copy state 2. update copy 3. set state to copy
+    persons.splice(personIndex, 1);
+    this.setState({persons:persons});
   }
 
   nameChangedHandler = (event) => {
@@ -97,10 +110,9 @@ class App extends Component {
 
   }
 
-  usernameChangeHandler = (event) => {
-    this.setState({
-      username: event.target.value
-    })
+  togglePersonsHandler = () => {
+    const doesShow = this.state.showPersons;
+    this.setState({showPersons: !doesShow});
   }
 
   //click is very important, you can pass methods as props to be used in other methods. click is just the name that will be refrenced in other components
@@ -114,10 +126,43 @@ class App extends Component {
       padding: '8px'
     }
 
-    const inputStyle = {
-      border: "1px solid blue",
-      width:"80%",
-      height:"30px"
+    let persons = null;
+    if(this.state.showPersons) {
+      persons = (
+        <div>
+          {this.state.persons.map((person, index) => {
+            return (
+              <Person 
+                key={person.id}
+                name={person.name} 
+                age={person.age} 
+                click={ () => this.deletePersonHandler(index)}
+              />
+            )
+          })}
+        </div>
+      );
+
+      //static, not very useful.
+      // persons = (
+      //   <div>
+      //     <Person 
+      //       name={this.state.persons[0].name} 
+      //       age={this.state.persons[0].age}
+      //       click={this.switchNameHandler.bind(this, "Taylor - Switched with Paragraph")}> My hobbies: Painting, Programming
+      //     </Person>
+
+      //     <Person 
+      //       name={this.state.persons[1].name} 
+      //       age={this.state.persons[1].age} 
+      //       changed={this.nameChangedHandler}/>
+
+      //     <Person 
+      //       name={this.state.persons[2].name} 
+      //       age={this.state.persons[2].age}>
+      //     </Person>
+      //   </div>
+      // );
     }
 
     return (
@@ -125,35 +170,9 @@ class App extends Component {
         <h1>Hi, I'm a react app</h1>
         <button 
           style={style}
-          onClick={() => this.switchNameHandler('Switched with Button in a new way!')} className="switchName">Switch Name
+          onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
         </button>
-        <Person 
-          name={this.state.persons[0].name} 
-          age={this.state.persons[0].age}
-          click={this.switchNameHandler.bind(this, "Taylor - Switched with Paragraph")}> My hobbies: Painting, Programming
-        </Person>
-
-        <Person 
-          name={this.state.persons[1].name} 
-          age={this.state.persons[1].age} 
-          changed={this.nameChangedHandler}/>
-
-        <Person 
-          name={this.state.persons[2].name} 
-          age={this.state.persons[2].age}>
-        </Person>
-
-        <UserOutput
-          p1={"This is some fun text!"}
-          userName={this.state.username}>
-        </UserOutput>
-
-        <UserOutput
-          p1={"Who honestly knew coding could be so fun?"}
-          userName={"Username: DaveCutePatoot"}>
-        </UserOutput>
-
-        <UserInput style={inputStyle} changed={this.usernameChangeHandler} userName={this.state.username} />
+        {persons}
       </div>
     );
   }
