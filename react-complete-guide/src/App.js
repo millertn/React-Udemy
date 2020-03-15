@@ -1,4 +1,5 @@
-//webHook Version
+//IMPORTANT webHook Version
+
 // import React, { useState } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
@@ -77,8 +78,6 @@ class App extends Component {
   //state is to be used sparingly and with care, function components are preferred
   
   switchNameHandler = (newName) => {
-      //this is a nono
-      // this.state.persons[0].name = this.state.persons[0].name + " Switched"; 
       this.setState({
         persons:[
           {name: newName, age:23},
@@ -89,13 +88,8 @@ class App extends Component {
   }
 
   deletePersonHandler = (personIndex) => {
-    //this can lead to unpredictability and is bad practice as it manipulates the original data
-    // const persons = this.state.persons;
-
-    //these two are the same, tho the spread operator (...) is more modern.
     const persons = [...this.state.persons]
-    // const persons = this.state.persons.slice();
-
+    // const persons = this.state.persons.slice();, same as above
     //best practice for updating state: 1. copy state 2. update copy 3. set state to copy
     persons.splice(personIndex, 1);
     this.setState({persons:persons});
@@ -160,49 +154,27 @@ class App extends Component {
       );
     }
 
-      //static, not very useful.
-      // persons = (
-      //   <div>
-      //     <Person 
-      //       name={this.state.persons[0].name} 
-      //       age={this.state.persons[0].age}
-      //       click={this.switchNameHandler.bind(this, "Taylor - Switched with Paragraph")}> My hobbies: Painting, Programming
-      //     </Person>
-
-      //     <Person 
-      //       name={this.state.persons[1].name} 
-      //       age={this.state.persons[1].age} 
-      //       changed={this.nameChangedHandler}/>
-
-      //     <Person 
-      //       name={this.state.persons[2].name} 
-      //       age={this.state.persons[2].age}>
-      //     </Person>
-      //   </div>
-      // );
-
-
-    // return (
-    //   <div className="App">
-    //     <h1>Hi, I'm a react app</h1>
-    //     <button 
-    //       style={style}
-    //       onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
-    //     </button>
-    //     {persons}
-    //     <input type="text" onChange={ () => this.getTextHandler()} />
-    //     <p>This is the text you entered: </p>
-    //   </div>
-    // );
-
     return (
-      <div className='App'>
-        <AppComponent 
-          length={this.state.currentTextLength}
-          changed={(event) => this.getTextHandler(event)}
-        />
+      <div className="App">
+        <h1>Hi, I'm a react app</h1>
+        <button 
+          style={style}
+          onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
+        </button>
+        {persons}
+        <input type="text" onChange={ () => this.getTextHandler()} />
+        <p>This is the text you entered: </p>
       </div>
     );
+
+    // return (
+    //   <div className='App'>
+    //     <AppComponent 
+    //       length={this.state.currentTextLength}
+    //       changed={(event) => this.getTextHandler(event)}
+    //     />
+    //   </div>
+    // );
   }
 }
 
