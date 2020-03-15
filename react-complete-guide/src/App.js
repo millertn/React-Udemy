@@ -57,14 +57,29 @@
 
 //non webHook version
 import React, { Component } from 'react';
+// import Radium, {StyleRoot} from 'radium';
+import styled from 'styled-components';
 import logo from './logo.svg';
 import './App.css';
 import Person from './Person/Person';
-import AppComponent from './AppComponent/AppComponent';
-import UserInput from './Lecture3Assigment/UserInput/UserInput';
-import UserOutput from './Lecture3Assigment/UserOutput/UserOutput';
+
+
+// let StyledButton = styled.button`
+//     background-color: ${props => props.alt ? 'red' : 'green'};
+//     color:white;
+//     font:inherit;
+//     border: 1px solid blue;
+//     padding: 8px;
+//     cursor:pointer;
+//     &:hover {
+//       background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
+//       color:black;
+//     }
+//   `;
+
 
 class App extends Component {
+  
   state = {
     persons: [
       {id: 1, name: "Taylor", age:23},
@@ -128,12 +143,20 @@ class App extends Component {
   //bind is better, the other way used in the button can be inefficient
   render() {
 
-    const style = {
-      backgroundColor: 'white',
-      font:'inherit',
-      border: "1px solid blue",
-      padding: '8px'
-    }
+    // const style = {
+    //   backgroundColor: 'green',
+    //   color:'white',
+    //   font:'inherit',
+    //   border: "1px solid blue",
+    //   padding: '8px',
+    //   cursor:'pointer',
+    //   ':hover': {
+    //     backgroundColor : 'lightgreen',
+    //     color:'black'
+    //   }
+    // };
+
+    
 
     let persons = null;
     if(this.state.showPersons) {
@@ -152,30 +175,43 @@ class App extends Component {
           })}
         </div>
       );
+
+      // style.backgroundColor = 'red';
+      // style[':hover'] = {
+      //   backgroundColor : 'salmon',
+      //   color:'black'
+      // }
+
+
+    }
+
+    //"red bold" for applying css classes
+    // let classes = ['red', 'bold'].join(' ');
+    const classes = [];
+    if (this.state.persons.length <= 2) {
+      classes.push('red'); // classes = ['red']
+    }
+
+    if (this.state.persons.length <= 1) {
+      classes.push('bold'); // classes = ['red', 'bold]
     }
 
     return (
-      <div className="App">
-        <h1>Hi, I'm a react app</h1>
-        <button 
-          style={style}
-          onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
-        </button>
-        {persons}
-        <input type="text" onChange={ () => this.getTextHandler()} />
-        <p>This is the text you entered: </p>
-      </div>
+      // <StyleRoot>
+        <div className="App">
+          <h1>Hi, I'm a react app</h1>
+          <p className={classes.join(' ')}>Coding is so fun!</p>
+          <StyledButton 
+            alt={this.state.showPersons} 
+            // style={style}
+            onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
+          </StyledButton>
+          {persons}
+        </div>
+      // </StyleRoot>
     );
-
-    // return (
-    //   <div className='App'>
-    //     <AppComponent 
-    //       length={this.state.currentTextLength}
-    //       changed={(event) => this.getTextHandler(event)}
-    //     />
-    //   </div>
-    // );
   }
 }
 
 export default App;
+// export default Radium(App);
