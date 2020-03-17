@@ -58,10 +58,11 @@
 //non webHook version
 import React, { Component } from 'react';
 // import Radium, {StyleRoot} from 'radium';
-import styled from 'styled-components';
+// import styled from 'styled-components';
 import logo from './logo.svg';
-import './App.css';
+// import './App.css';
 import Person from './Person/Person';
+import classes from './App.css'
 
 
 // let StyledButton = styled.button`
@@ -112,7 +113,7 @@ class App extends Component {
 
   nameChangedHandler = (event, id) => {
     const personIndex = this.state.persons.findIndex(p => {
-      return p.id == id;
+      return p.id === id;
     });
 
     //alternate way
@@ -142,23 +143,8 @@ class App extends Component {
   //click is very important, you can pass methods as props to be used in other methods. click is just the name that will be refrenced in other components
   //bind is better, the other way used in the button can be inefficient
   render() {
-
-    // const style = {
-    //   backgroundColor: 'green',
-    //   color:'white',
-    //   font:'inherit',
-    //   border: "1px solid blue",
-    //   padding: '8px',
-    //   cursor:'pointer',
-    //   ':hover': {
-    //     backgroundColor : 'lightgreen',
-    //     color:'black'
-    //   }
-    // };
-
-    
-
     let persons = null;
+    let btnClass = [classes.Button];
     if(this.state.showPersons) {
       persons = (
         <div>
@@ -175,37 +161,33 @@ class App extends Component {
           })}
         </div>
       );
-
-      // style.backgroundColor = 'red';
-      // style[':hover'] = {
-      //   backgroundColor : 'salmon',
-      //   color:'black'
-      // }
-
-
+      btnClass.push(classes.Red);
     }
 
     //"red bold" for applying css classes
     // let classes = ['red', 'bold'].join(' ');
-    const classes = [];
+    const assignedClasses = [];
     if (this.state.persons.length <= 2) {
-      classes.push('red'); // classes = ['red']
+      assignedClasses.push(classes.red); // classes = ['red']
     }
 
     if (this.state.persons.length <= 1) {
-      classes.push('bold'); // classes = ['red', 'bold]
+      assignedClasses.push(classes.bold); // classes = ['red', 'bold]
     }
+
+    console.log(classes);
 
     return (
       // <StyleRoot>
-        <div className="App">
+        <div className={classes.App}>
           <h1>Hi, I'm a react app</h1>
-          <p className={classes.join(' ')}>Coding is so fun!</p>
-          <StyledButton 
+          <p className={assignedClasses.join(' ')}>Coding is so fun!</p>
+          {/* <StyledButton 
             alt={this.state.showPersons} 
             // style={style}
             onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
-          </StyledButton>
+          </StyledButton> */}
+          <button className={btnClass.join(' ')} onClick={() => this.togglePersonsHandler()}>Toggle People</button>
           {persons}
         </div>
       // </StyleRoot>
