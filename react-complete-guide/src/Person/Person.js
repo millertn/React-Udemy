@@ -24,6 +24,7 @@ const person = (params) => {
     return (
         //  {/* // <StyledDiv onClick={params.click}> */}
         // {/* <div onClick={params.click}>       */}
+        
         <div className="Person" onClick={params.click}>
             <p>I'm a person, my name is {params.name}, I am {params.age}.</p>
             <p>{params.children}</p>    

@@ -64,7 +64,6 @@ import logo from './logo.svg';
 import Person from './Person/Person';
 import classes from './App.css'
 
-
 // let StyledButton = styled.button`
 //     background-color: ${props => props.alt ? 'red' : 'green'};
 //     color:white;
@@ -150,7 +149,7 @@ class App extends Component {
         <div>
           {this.state.persons.map((person, index) => {
             return (
-              <Person 
+                <Person 
                 key={person.id}
                 name={person.name} 
                 age={person.age} 

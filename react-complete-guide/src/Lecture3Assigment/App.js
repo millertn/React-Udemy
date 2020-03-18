@@ -4,6 +4,7 @@ import './App.css';
 import UserInput from './Lecture3Assigment/UserInput/UserInput';
 import UserOutput from './Lecture3Assigment/UserOutput/UserOutput';
 import Char from './Lecture3Assigment/Char/Char';
+import ErrorBoundary from './ErrorBoundary/ErrorBoundary';
 
 //LECTURE THREE INSTRUCTIONS
 {/* <div className="Instructions">
