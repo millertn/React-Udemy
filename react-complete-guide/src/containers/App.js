@@ -59,37 +59,35 @@
 import React, { Component } from 'react';
 // import Radium, {StyleRoot} from 'radium';
 // import styled from 'styled-components';
-import logo from './logo.svg';
+import logo from '../assets/logo.svg';
 // import './App.css';
-import Person from './Person/Person';
+import Cockpit from '../components/Cockpit/Cockpit';
+import Persons from '../components/Persons/Persons';
 import classes from './App.css'
 
-// let StyledButton = styled.button`
-//     background-color: ${props => props.alt ? 'red' : 'green'};
-//     color:white;
-//     font:inherit;
-//     border: 1px solid blue;
-//     padding: 8px;
-//     cursor:pointer;
-//     &:hover {
-//       background-color: ${props => props.alt ? 'salmon' : 'lightgreen'};
-//       color:black;
-//     }
-//   `;
-
-
 class App extends Component {
-  
-  state = {
-    persons: [
-      {id: 1, name: "Taylor", age:23},
-      {id: 2, name:"Dave", age:28},
-      {id: 3, name:"JJ", age:28}
-    ],
-    username: 'daveCutePatoot',
-    showPersons: false,
-    currentTextLength:""
+
+  constructor (props) {
+    super(props);
+    console.log("[App.js] constructor");
+    this.state = {
+      persons: [
+        {id: 1, name: "Taylor", age:23},
+        {id: 2, name:"Dave", age:28},
+        {id: 3, name:"JJ", age:28}
+      ],
+      username: 'daveCutePatoot',
+      showPersons: false,
+      currentTextLength:""
+    }
   }
+
+
+  static getDerivedStateFromProps(props, state) {
+    console.log('[App.js] getDerivedStateFromProps', props);
+    return state;
+  }
+  
   //state is to be used sparingly and with care, function components are preferred
   
   switchNameHandler = (newName) => {
@@ -139,59 +137,32 @@ class App extends Component {
     this.setState({showPersons: !doesShow});
   }
 
-  //click is very important, you can pass methods as props to be used in other methods. click is just the name that will be refrenced in other components
-  //bind is better, the other way used in the button can be inefficient
+  componentWillMount() {
+    console.log("[App.js] ComponentWillMount");
+  }
+
+  componentDidMount() {
+    console.log('[App.js] ComponentDidMount');
+  }
+
   render() {
+    console.log("[App.js] render");
     let persons = null;
-    let btnClass = [classes.Button];
     if(this.state.showPersons) {
       persons = (
-        <div>
-          {this.state.persons.map((person, index) => {
-            return (
-                <Person 
-                key={person.id}
-                name={person.name} 
-                age={person.age} 
-                click= {() => this.deletePersonHandler(index)}
-                changed={ (event) => this.nameChangedHandler(event, person.id)}
-              />
-            )
-          })}
-        </div>
+          <Persons persons={this.state.persons} clicked={this.deletePersonHandler} changed = {this.nameChangedHandler}/>
       );
-      btnClass.push(classes.Red);
     }
-
-    //"red bold" for applying css classes
-    // let classes = ['red', 'bold'].join(' ');
-    const assignedClasses = [];
-    if (this.state.persons.length <= 2) {
-      assignedClasses.push(classes.red); // classes = ['red']
-    }
-
-    if (this.state.persons.length <= 1) {
-      assignedClasses.push(classes.bold); // classes = ['red', 'bold]
-    }
-
-    console.log(classes);
 
     return (
-      // <StyleRoot>
         <div className={classes.App}>
-          <h1>Hi, I'm a react app</h1>
-          <p className={assignedClasses.join(' ')}>Coding is so fun!</p>
-          {/* <StyledButton 
-            alt={this.state.showPersons} 
-            // style={style}
-            onClick={() => this.togglePersonsHandler()} className="switchName">Toggle People
-          </StyledButton> */}
-          <button className={btnClass.join(' ')} onClick={() => this.togglePersonsHandler()}>Toggle People</button>
+          <Cockpit title = {this.props.appTitle} persons={this.state.persons} chowPersons={this.state.showPersons} clicked={this.togglePersonsHandler}/>
           {persons}
         </div>
-      // </StyleRoot>
     );
   }
+
+
 }
 
 export default App;
