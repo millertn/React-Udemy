@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>Vue Js Course</title>
+    <script src='vue.js'></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <p>Vue JS is pretty cool - {{name}} {{age}}</p>
+        <p>{{age*3}}</p>
+        <p>{{giveRand()}}</p>
+        <img v-bind:src="link">
+        <input type="text" v-bind:value="name">
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name:"Taylor Miller",
+                age:'24',
+                link:'https://www.amazingclubs.com/img/flowerofthemonthclub.jpg'
+                // finishedLink:"<a href='https://google.com'>Google</a>"
+            }, methods : {
+                giveRand:function() {
+                    
+                    // let rand = Math.Random(1);
+                    return Math.random();
+                }
+            }
+        });
+    </script>
+</body>
+</html>
