@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>Vue Js Course</title>
+    <script src='vue.js'></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <button v-on:click="increase(2, $event)"></button>
+        <p>{{ counter }}</p>
+        <p v-on:mousemove="updateCoords">
+            Coordinates {{x}} / {{y}} -
+            <span v-on:mousemove.stop="">Dead Spot</span>
+        </p>
+        <input type="text" v-on:keyup.enter="alertMe">
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                counter:0,
+                x:0,
+                y:0
+            }, 
+            methods : {
+                increase: function(step, event) {
+                    this.counter += step;
+                },
+                updateCoords:function(event) {
+                    this.x = event.clientX;
+                    this.y = event.ClientY;
+                },
+                dummy:function(event) {
+                    event.stopPropogation();
+                },
+                alertMe:function() {
+                    alert('Alert!');
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+

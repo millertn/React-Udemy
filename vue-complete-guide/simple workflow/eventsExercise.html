@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>Vue Js Course</title>
+    <script src='vue.js'></script>
+</head>
+
+<body>
+
+    <div id="app">
+        <button v-on:click="alertMe">Alert Me</button>
+        <p></p>
+        <input type="text" v-on:keydown="getKey">
+        <p>{{ currentKey }}</p>
+
+        <input type="text" v-on:keydown.enter="getEnterKey">
+        <p>{{ currentKey }}</p>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                currentKey:''
+            }, 
+            methods : {
+                alertMe:function() {
+                    alert("Button Hit");
+                },
+                getKey:function(event) {
+                    this.currentKey = event.target.value;
+                },
+                getEnterKey: function() {
+                    this.currentKey = event.target.value;
+                    console.log("enter key hit");
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
