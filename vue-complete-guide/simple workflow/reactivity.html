@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>Vue Js Course</title>
+    <script src='vue.js'></script>
+</head>
+
+<!-- Known Options for Vue Instance -->
+<!-- 
+    el: connect to element
+    data: stored data to be used/updated
+    methods: methods accessible to the vue instance
+    computed: dependent properties
+    watch: execute code upon data changes
+ -->
+
+<body>
+
+    <div id="app">
+        <input type="text" v-model="name">
+        <p> {{ name }} </p>
+
+        <!-- this requires two methods and isn't the best -->
+
+        <!-- <button v-on:click="increase">Increase</button> -->
+        <!-- <button v-on:click="decrease">decrease</button> -->
+        <!-- <p>Result: {{ result }}</p> -->
+
+        <button v-on:click="counter++">Increase</button>
+        <button v-on:click="counter--">decrease</button>
+        <button v-on:click="counterTwo++">Increase Second Counter</button>
+        <p>Counter: {{ counter }}</p>
+        <p>{{ result() }} | {{ output }}</p>
+
+
+
+
+        <!-- Event Shortcuts -->
+
+        <button v-on:click="changeLink">Change Link</button>
+        <a v-bind:href="link">Link</a>
+
+        <button @click="changeLink">Change Link</button>
+        <a :href="link">Link</a>
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                name:"Taylor",
+                counter:0,
+                result:"",
+                link:"https://google.com"
+            }, 
+            computed: {
+                output:function() {
+                    return this.counter > 5 ? "Greater and 5" : "Less thand 5";
+                }
+            },
+            watch : {
+                counter: function (value) {
+                    var vm = this;
+                    setTimeout(function() {
+                        vm.counter=0;
+                    }, 2000)
+                }
+            },
+            methods : {
+                increase:function() {
+                    this.counter++;
+                    this.result = this.counter > 5 ? 'Greater than 5' : 'Less than 5';
+                },
+                decrease:function() {
+                    this.counter--;
+                    this.result = this.counter > 5 ? 'Greater than 5' : 'Less than 5';
+                },
+                result:function() {
+                    return this.counter > 5 ? "Greater and 5" : "Less thand 5";
+                },
+                changeLink:function() {
+                    this.link = 'https://apple.com';
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
