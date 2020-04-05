@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>Vue Js Course</title>
+    <script src='vue.js'></script>
+</head>
+
+<!-- Known Options for Vue Instance -->
+<!-- 
+    el: connect to element
+    data: stored data to be used/updated - called like a property in functions, just by name in app
+    methods: methods accessible to the vue instance - called like a method in string interpolation
+    computed: dependent properties - called like a property
+    watch: execute code upon data changes - refrences an already defined data/computed property
+ -->
+
+<body>
+
+    <style>
+        #effect {
+            width:100px;
+            height:100px;
+            border:1px solid black;
+        }
+
+        .highlight {
+            background-color: red;
+            width:200px;
+        }
+
+        .shrink {
+            background-color: grey;
+            width:50px !important;
+        }
+
+        .happy {
+            background-color: green;
+        }
+
+        .sad {
+            background-color: blue;
+        }
+
+        .mad {
+            background-color: red;
+        }
+
+        .text-color {
+            color:purple;
+        }
+
+        .visible {
+            width:50px;
+            height:100px;
+        }
+
+        .progressBar {
+            width:200px;
+            height:20px;
+            border:1px solid black;
+        }
+
+        .innerBar {
+            max-width:200px;
+            height:20px;
+            
+        }
+    </style>
+
+    <div id="app">
+        <button @click="startEffect"></button>
+        <div id='effect' :class="effectClasses"></div>
+
+        <div :class="['shrink', 'text-color']">everything is awesoooome</div>
+
+        <div :class="userClass"> I got no class =(</div>
+        <input type="text" v-model="userClass">
+
+        <br><br>
+
+        <input type="text" v-model="userClass">
+        <input type="text" v-model="isVisible">
+        <div :class="[{visible:isVisible}, userClass]"></div>
+
+
+        <br><br>
+
+        <input type="text" v-model="userStyle.backgroundColor">
+        <div :style="userStyle"></div>
+
+        <br><br>
+
+        <button @click="startProgress">Start Progress</button>
+        <div :class="['progressBar']">
+            <div :class="['innerBar']" :style="barProgress"></div>
+        </div>
+
+    </div>
+    
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                effectClasses: {
+                    highlight: false,
+                    shrink:true
+                },
+                userClass: '',
+                isVisible:true,
+                userStyle: {
+                    width:'100px',
+                    height:'150px',
+                    backgroundColor:'grey'
+                },
+                barProgress: {
+                    width:'0px',
+                    backgroundColor:'green'
+                }
+            }, 
+            computed: {
+            },
+            watch : {
+            },
+            methods : {
+                startEffect:function() {
+                    var vm = this;
+                    setInterval(function() {
+                         vm.effectClasses.highlight = !vm.effectClasses.highlight,
+                         vm.effectClasses.shrink = !vm.effectClasses.shrink
+                    }, 1000);
+                }, 
+                startProgress:function() {
+                    var vm = this;
+                    var width = 0 
+                    setInterval(function() {
+                        width = width + 5;
+                        vm.barProgress.width = width + "px";
+                    }, 500);
+                }
+            }
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
