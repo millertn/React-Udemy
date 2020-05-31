@@ -1,0 +1,65 @@
+<!-- MAY NEED TO ADD ? IN FRONT OF RECIPE.PROPERTY -->
+<ion-header>
+  <ion-toolbar color="dark">
+    <ion-buttons slot="start">
+      <ion-back-button defaultHref="/recipes"></ion-back-button>
+    </ion-buttons>
+    <ion-title class="ion-text-center">{{recipe.title}}</ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onDeleteRecipe()">
+        <ion-icon name="trash" slot="icon-only"></ion-icon>
+      </ion-button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="4">
+        <ion-img [src]="recipe.imageUrl"></ion-img>
+      </ion-col>
+      <ion-col size="4">
+        <ion-list>
+          <ion-list-header>Ingredients</ion-list-header>
+          <ion-item *ngFor="let ingredient of recipe.ingredients">
+            <ion-label>{{ingredient}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+      <ion-col size="4">
+        <ion-list>
+          <ion-list-header>Directions</ion-list-header>
+          <ion-item *ngFor="let direction of recipe.directions">
+            <ion-label>{{direction}}</ion-label>
+          </ion-item>
+        </ion-list>
+      </ion-col>
+    </ion-row>
+    <ion-row>
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Prep Time: {{recipe.prepTime}}
+          </ion-label> 
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Cook Time: {{recipe.cookTime}}
+          </ion-label> 
+        </ion-item>
+      </ion-col>
+
+      <ion-col>
+        <ion-item>
+          <ion-label>
+            Total Time: {{recipe.prepTime + recipe.cookTime}}
+          </ion-label> 
+        </ion-item>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+</ion-content>
