@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
-import { NavController } from '@ionic/angular';
+import { NavController, ModalController } from '@ionic/angular';
 import { PlacesService } from '../../places.service';
 import { Place } from '../../place.model';
+import { CreateBookingComponent } from '../../../bookings/create-booking/create-booking.component';
 
 @Component({
   selector: 'app-place-detail',
@@ -17,7 +18,8 @@ export class PlaceDetailPage implements OnInit {
     private router: Router,
     private nav: NavController,
     private places: PlacesService,
-    private activeRoute: ActivatedRoute
+    private activeRoute: ActivatedRoute,
+    private modalController: ModalController
     ) { }
 
   ngOnInit() {
@@ -30,10 +32,14 @@ export class PlaceDetailPage implements OnInit {
   }
 
   onBookPlace () {
-      this.nav.navigateBack('/places/tabs/discover');
+      // this.nav.navigateBack('/places/tabs/discover');
       //unreliable, don't use if you can't guarantee there will be a stack of pages to pop off of
       // this.nav.pop();
       // this.router.navigateByUrl('/places/tabs/discover');
+    this.modalController.create({component:CreateBookingComponent, componentProps: {location: this.place}}).then( modalEl => {
+      modalEl.present();
+    })
+
   }
 
 }

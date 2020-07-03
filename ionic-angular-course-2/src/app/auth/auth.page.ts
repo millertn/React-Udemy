@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { AuthService } from './auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-auth',
@@ -7,9 +9,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AuthPage implements OnInit {
 
-  constructor() { }
+  constructor(
+    private authentication: AuthService,
+    private router: Router
+  ) { }
 
   ngOnInit() {
   }
 
+  onLogin() {
+    this.authentication.login();
+    this.router.navigateByUrl('places/tabs/discover');
+    // console.log(this.authentication.userIsAuthenticated);
+  }
 }
