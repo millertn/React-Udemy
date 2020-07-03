@@ -35,28 +35,28 @@
         </template>
         <p v-show="show">Can you also see me?</p>
         <!-- v-if completley detatches an element, show simply adds a style of display:none instead -->
-        <button :click="show = !show">Switch</button>
+        <!-- <button :click="show = !show">Switch</button> -->
 
 
         <!-- Everything for v-for rendering lists -->
         <ul>
-            <li v-for="ingredient in ingredients">{{ingredient}}</li>
+            <!-- <li v-for="ingredient in ingredients">{{ingredient}}</li> -->
             <!-- Order is important, element is always first, index is always second -->
-            <li v-for="(ingredient, index) in ingredients">{{ingredient}} ({{index}})</li>
+            <li v-for="(ingredient, index) in ingredients" :key="ingredient" >{{ingredient}} ({{index}})</li>
         </ul>
+        <button @click="ingredients.push('spices')">Add Spices</button>
 
         <hr>
 
         <!-- template example -->
         <ul>
             <template v-for="(ingredient, index) in ingredients">
-                <h1>{{ingredient}}</h1>
-                <p>{{index}}</p>
+                <p>{{ingredient}} : {{index}}</p>
+                <!-- <p>{{index}}</p> -->
             </template>
         </ul>
 
         <hr>
-
         <ul>
 
             <li v-for="person in persons">{{ person.name }}</li>
@@ -64,9 +64,12 @@
             <li v-for="person in persons">
                 <span v-for="value in person">{{value}}</span>
                 <!-- first is always the property, second is the property name -->
-                <span v-for="(value, key) in person">{{value}}</span>
+                <span v-for="(value, key, index) in person">{{ key }}: {{value}} ({{index}})</span>
             </li>
         </ul>
+
+        <hr>
+        <span v-for="n in 10">{{n}}</span>
 
     </div>
 
@@ -79,7 +82,7 @@
                 ingredients: ['Chicken Breast', 'Mac and Cheese', 'Buttermilk'],
                 persons: [
                     {name:'Max', age:27, color:'red'},
-                    {name:'Taylor', age:24, color:'purple'}
+                    {name:'Taylor', age:23, color:'purple'}
                 ]
             }, 
             computed: {

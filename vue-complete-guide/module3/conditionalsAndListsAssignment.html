@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible">
+    <title>Vue Js Course</title>
+    <script src='vue.js'></script>
+</head>
+
+<!-- Known Options for Vue Instance -->
+<!-- 
+    el: connect to element
+    data: stored data to be used/updated - called like a property in functions, just by name in app
+    methods: methods accessible to the vue instance - called like a method in string interpolation
+    computed: dependent properties - called like a property
+    watch: execute code upon data changes - refrences an already defined data/computed property
+ -->
+
+<body>
+
+    <style>
+    </style>
+
+
+    <div id="app">
+
+        <!-- Task 1 -->
+        <p v-if="!show">You are showing me with if!</p>
+        <p v-show="show">You are showing me with show!</p>
+
+        <button @click="show = !show">Toggle Show</button>
+
+
+        <!-- task 2 -->
+
+        <ul>
+            <li v-for="(value, key) in ingredients">
+                <span>{{ key }}: {{ value }}</span>
+            </li>
+        </ul>
+
+        <!-- task 3 -->
+
+        <ul>
+            <li v-for="collection in collections">
+                <span v-for="(key, value, index) in collection"> {{ key }} : {{ value }}, {{ index }}<br></span>
+            </li>
+        </ul>
+
+        <!-- task 4 -->
+
+        <ul>
+            <li v-for="prop in myObject">
+                <ul v-if="Array.isArray(prop)">
+                    <li v-for="data in prop">{{data}}</li>
+                </ul>
+                <p v-else>{{prop}}</p>
+            </li>
+        </ul>
+
+    </div>
+
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                show:true,
+                ingredients: ['Chicken Breast', 'Mac and Cheese', 'Buttermilk'],
+                collections: [
+                    {title:"Lord of the Rings", author:"J. R. Tolkein", books:'3'}
+                ],
+                myObject: {name: 'TESTOBJECT', data:[1.67, 1.33, .98, 2.21]}
+            }, 
+        });
+    </script>
+</body>
+</html>
+
+
+
+
+
