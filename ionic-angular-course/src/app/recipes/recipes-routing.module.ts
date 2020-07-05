@@ -9,9 +9,13 @@ const routes: Routes = [
     component: RecipesPage
   },
   {
-    path: 'recipe-detail',
+    path: 'create',
+    loadChildren: () => import('./recipe-create/recipe-create.module').then( m => m.RecipeCreatePageModule)
+  },
+  {
+    path: ':recipeId',
     loadChildren: () => import('./recipe-detail/recipe-detail.module').then( m => m.RecipeDetailPageModule)
-  }
+  },
 ];
 
 @NgModule({

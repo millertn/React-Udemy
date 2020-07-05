@@ -76,4 +76,8 @@ export class RecipesService {
       return recipe.id !== recipeId;
     });
   }
+
+  createRecipe() {
+
+  }
 }
