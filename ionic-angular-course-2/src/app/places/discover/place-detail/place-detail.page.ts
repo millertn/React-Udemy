@@ -36,8 +36,18 @@ export class PlaceDetailPage implements OnInit {
       //unreliable, don't use if you can't guarantee there will be a stack of pages to pop off of
       // this.nav.pop();
       // this.router.navigateByUrl('/places/tabs/discover');
-    this.modalController.create({component:CreateBookingComponent, componentProps: {location: this.place}}).then( modalEl => {
+    this.modalController.create({
+      component:CreateBookingComponent,
+      componentProps: {location: this.place},
+      id:"modal1"
+    }).then( modalEl => {
       modalEl.present();
+      return modalEl.onDidDismiss()
+    }).then(resultData => {
+      console.log(resultData.data, resultData.role);
+      if (resultData.role == 'book') {
+        console.log("BOOKED");
+      }
     })
 
   }

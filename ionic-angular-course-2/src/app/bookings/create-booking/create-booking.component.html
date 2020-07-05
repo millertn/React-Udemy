@@ -3,8 +3,15 @@
     <ion-title>
       Book {{location.title}}!
     </ion-title>
+    <ion-buttons slot="primary">
+      <ion-button (click)="onCancel()">
+        <ion-icon name="close"></ion-icon>
+      </ion-button>
+    </ion-buttons>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content class="ion-text-center ion-padding">
   <h1>Book This Place!! ;D</h1>
+  <p>{{location.description}}</p>
+  <ion-button color="primary" (click)="onBookPlace()"> Book! </ion-button>
 </ion-content> 
