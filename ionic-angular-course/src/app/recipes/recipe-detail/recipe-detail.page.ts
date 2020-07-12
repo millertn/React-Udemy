@@ -11,7 +11,7 @@ import { AlertController } from '@ionic/angular';
 })
 export class RecipeDetailPage implements OnInit {
 
-  recipe:Recipe;
+  recipe;
 
   constructor(
     private route: ActivatedRoute,

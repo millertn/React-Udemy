@@ -19,4 +19,12 @@ export class RecipeCreatePage implements OnInit {
     this.recipes.createRecipe();
   }
 
+  addIngredientInput() {
+
+  }
+
+  addDirectionInput() {
+    
+  }
+
 }

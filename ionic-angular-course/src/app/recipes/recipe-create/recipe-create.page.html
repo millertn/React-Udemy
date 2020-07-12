@@ -1,9 +1,55 @@
 <ion-header>
   <ion-toolbar>
-    <ion-title>recipe-create</ion-title>
+    <ion-title>New Recipe</ion-title>
   </ion-toolbar>
 </ion-header>
-
 <ion-content>
+<ion-grid>
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Title</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Image Url</ion-label>
+        <ion-input type="text"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Prep Time</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+    </ion-col>
+    <ion-col>
+      <ion-item>
+        <ion-label position="floating">Cook Time</ion-label>
+        <ion-input type="number"></ion-input>
+      </ion-item>
+    </ion-col>
+  </ion-row>
 
+  <ion-row>
+    <ion-col>
+      <ion-item>
+        <ion-label>Ingredients</ion-label>\
+        <ion-button slot="end" (click)="addIngredientInput()">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-col>
+
+    <ion-col>
+      <ion-item>
+        <ion-label>Directions</ion-label>
+        <ion-button slot="end" (click)="addDirectionInput()">
+          <ion-icon name="add-outline"></ion-icon>
+        </ion-button>
+      </ion-item>
+    </ion-col>
+  </ion-row>
+</ion-grid>
 </ion-content>

@@ -8,7 +8,7 @@ import { RecipesService } from './recipes.service';
   styleUrls: ['./recipes.page.scss'],
 })
 export class RecipesPage implements OnInit {
-  recipes : Recipe[];
+  recipes: Recipe[];
   
   constructor(
     private service:RecipesService
@@ -16,6 +16,7 @@ export class RecipesPage implements OnInit {
 
   ngOnInit() {
     this.recipes = this.service.getAllRecipes();
+    console.log(this.recipes);
   }
 
 }

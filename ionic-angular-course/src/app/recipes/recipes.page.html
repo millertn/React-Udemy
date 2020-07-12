@@ -2,7 +2,7 @@
   <ion-toolbar>
     <ion-title>Recipes</ion-title>
     <ion-buttons slot="end">
-      <ion-button class="ion-margin">
+      <ion-button class="ion-margin"  [routerLink]="['./', 'create']">
         Create New
       </ion-button>
     </ion-buttons>
@@ -11,6 +11,6 @@
 
 <ion-content>
   <ion-list lines="none">
-    <app-recipe-item *ngFor="let recipe of recipes" [recipeItem]="recipe"></app-recipe-item>
+    <app-recipe-item *ngFor="let recipe of recipes" [recipeItem]="recipe"> </app-recipe-item>
   </ion-list>
 </ion-content>
