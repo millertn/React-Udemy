@@ -20,11 +20,11 @@ export class RecipeCreatePage implements OnInit {
   }
 
   addIngredientInput() {
-
+    
   }
 
   addDirectionInput() {
-    
+
   }
 
 }
