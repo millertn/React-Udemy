@@ -3,7 +3,7 @@ var cheerio = require("cheerio");
 function check104Key() {
     const options = {
       url:
-        "https://www.keychron.com/products/keychron-k1-wireless-mechanical-keyboard?variant=31238122242137",
+        "https://www.keychron.com/products/keychron-k1-wireless-mechanical-keyboard?variant=31301928583257",
       headers: {
         "User-Agent": "request",
       },
@@ -24,7 +24,7 @@ function check104Key() {
 function check87Key() {
     const options = {
       url:
-        "https://www.keychron.com/products/keychron-k1-wireless-mechanical-keyboard?variant=31253556625497",
+        "https://www.keychron.com/products/keychron-k1-wireless-mechanical-keyboard?variant=31301928157273",
       headers: {
         "User-Agent": "request",
       },
