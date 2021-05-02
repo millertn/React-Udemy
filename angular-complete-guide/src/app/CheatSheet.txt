@@ -1,0 +1,28 @@
+<!---------    GENERAL THINGS    --------->
+    - when making a new component, don't forget to add it to the app.module.ts file otherwise your app won't be able to find it!
+
+
+<!-----------    HTML THINGS    ----------->
+    - String Interpolation: {{variable}} 
+    - Property Binding: [property]="data"
+    - Event Binding: (event)="expression"
+    - Two-Way Binding [(ngModel)]="data"
+    - Directive (structural) *directiveName="data"
+
+
+<!---------    COMPONENT THINGS    --------->
+    - Selector Options: defined in component as selector (string):'componentSelector'
+        app-servers: - called in html using <app-servers></app-servers> (tag selector)
+        .app-servers - called in html using <div class="app-servers"></div> (class selector)
+        [app-servers] - called in html using <div app-servers></div> (attribute selector)
+    
+    - Templates Options
+        templateUrl (string): link to external html, usually in the same folder
+        tempalate (string): internally written html, can use ``s to make life easier
+
+    - Styling Options
+        styleUrls (Array<string>): link to external stye sheets
+        style (string): internally written stylesheet, can use ``s to make life easier
+
+
+

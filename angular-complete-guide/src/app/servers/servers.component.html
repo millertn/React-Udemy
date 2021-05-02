@@ -1,0 +1,21 @@
+<!-- property, string interpolation, event, and two way binding in action -->
+
+<label>Server Name</label>
+<!-- event binding -->
+<!-- <input type="text" class="form-control" (input)="onUpdateServerName($event)"> -->
+
+<!-- 2 way binging -->
+<input type="text" class="form-control" [(ngModel)]="serverName">
+<p>{{serverName}}</p>
+
+<button class="btn btn-primary" [disabled]="!allowNewServer" (click)="onCreateServer()"> Add Server</button>
+<p>{{allowNewServer}}</p>
+<!-- <p>{{serverCreationStatus}}</p> -->
+<p *ngIf="serverCreated; else serverElse">Server was Created, server name is {{serverName}} </p>
+<ng-template #serverElse>
+    <p>No Server was Created</p>
+</ng-template>
+
+<!-- <p [innerText]="allowNewServer"></p>  this is an option to set the text on an element but its a bit dweebtastic -->
+<app-server *ngFor="let server of servers"></app-server>
+<!-- <app-server></app-server> -->
